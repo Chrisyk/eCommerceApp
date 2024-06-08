@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.MAUI.Views.EditItemView"
+             Title="EditItemView"
+             NavigatedTo="ContentPage_NavigatedTo">
+    <VerticalStackLayout 
+        Padding="30,0"
+        Spacing="5">
+        <Label Text="Edit Item" FontSize="24" HorizontalOptions="Center" />
+
+        <Label Text="ID" />
+        <Entry Text="{Binding Id}" IsEnabled="False" />
+
+        <Label Text="Name" />
+        <Entry Text="{Binding Name}" />
+
+        <Label Text="Description" />
+        <Entry Text="{Binding Description}" />
+
+        <Label Text="Price" />
+        <Entry Text="{Binding Price}" Keyboard="Numeric" />
+
+        <Label Text="Stock" />
+        <Entry Text="{Binding Stock}" Keyboard="Numeric" />
+
+        <Button Text="Save" Clicked="SaveClicked" />
+        <Button Text="Cancel" Clicked="CancelClicked" />
+    </VerticalStackLayout>
+</ContentPage>

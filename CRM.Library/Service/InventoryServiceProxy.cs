@@ -9,7 +9,7 @@ using CRM.Models;
 
 namespace CRM.Library.Service
 {
-    internal class InventoryServiceProxy
+    public class InventoryServiceProxy
     {
         private static InventoryServiceProxy? instance;
         private static object instanceLock = new object();
@@ -21,6 +21,13 @@ namespace CRM.Library.Service
             {
                 return items.AsReadOnly();
             }
+        }
+
+        private InventoryServiceProxy()
+        {
+            items = new List<Item> {
+                new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=2}
+            };
         }
 
         private int NextId
@@ -48,9 +55,23 @@ namespace CRM.Library.Service
             }
             return item;
         }
-        private InventoryServiceProxy()
+
+        public void Remove(int id)
         {
-            items = new List<Item>();
+            if (items == null)
+            {
+                return;
+            }
+            var itemToDelete = items.FirstOrDefault(c => c.Id == id);
+            if (itemToDelete != null)
+            {
+                while (id < items.Count)
+                {
+                    items[id].Id = id;
+                    id++;
+                }
+                items.Remove(itemToDelete);
+            }
         }
         public static InventoryServiceProxy Current
         {
