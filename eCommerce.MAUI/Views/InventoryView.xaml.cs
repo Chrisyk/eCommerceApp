@@ -9,11 +9,13 @@ public partial class InventoryView : ContentPage
 	{
 		InitializeComponent();
         BindingContext = new InventoryManagementViewModel();
-	}
+    }
 
     private void BackClicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//MainPage");
+        var viewModel = BindingContext as InventoryManagementViewModel;
+        viewModel?.RefreshItems();
     }
     private void DeleteItem(object sender, EventArgs e)
     {
@@ -26,8 +28,23 @@ public partial class InventoryView : ContentPage
         }
     }
 
-    private void EditClicked(object sender, EventArgs e)
+    private void AddClicked(object sender, EventArgs e)
     {
-        (BindingContext as InventoryManagementViewModel).UpdateItem();
+        Shell.Current.GoToAsync($"//EditItem");
     }
+
+    private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
+    {
+        (BindingContext as InventoryManagementViewModel).RefreshItems();
+    }
+
+    private void ContentPage_NavigatedFrom(object sender, NavigatedFromEventArgs e)
+    {
+
+    }
+    private void InlineDelete_Clicked(object sender, EventArgs e)
+    {
+        (BindingContext as InventoryManagementViewModel).RefreshItems();
+    }
+
 }

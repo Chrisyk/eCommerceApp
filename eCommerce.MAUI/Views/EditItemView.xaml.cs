@@ -8,7 +8,6 @@ public partial class EditItemView : ContentPage
 	public EditItemView()
 	{
 		InitializeComponent();
-        BindingContext = new InventoryManagementViewModel();
     }
     private void SaveClicked(object sender, EventArgs e)
     {

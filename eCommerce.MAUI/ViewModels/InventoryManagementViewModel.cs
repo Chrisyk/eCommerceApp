@@ -51,6 +51,7 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
+
         public void UpdateItem()
         {
             if (SelectedItem?.Item == null)
