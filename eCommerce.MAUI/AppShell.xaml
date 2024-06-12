@@ -24,5 +24,9 @@
      Title="EditItem"
      ContentTemplate="{DataTemplate views:EditItemView}"
      Route="EditItem" />
+    <ShellContent
+     Title="Checkout"
+     ContentTemplate="{DataTemplate views:CheckoutView}"
+     Route="Checkout" />
 
 </Shell>

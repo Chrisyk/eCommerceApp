@@ -4,72 +4,76 @@
              x:Class="eCommerce.MAUI.Views.InventoryView"
              Title="InventoryView"
              NavigatedTo="ContentPage_NavigatedTo">
-    <VerticalStackLayout 
-        Padding="30,0"
-        Spacing="20">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Text="ID" />
-            <Label Grid.Column="1" Text="NAME" FontAttributes="Bold"/>
-            <Label Grid.Column="2" Text="DESCRIPTION"/>
-            <Label Grid.Column="3" Text="PRICE"/>
-            <Label Grid.Column="4" Text="STOCK"/>
-        </Grid>
-        <ListView
-            ItemsSource="{Binding Items}"
-            SelectedItem="{Binding SelectedItem}">
-            
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding Id}" />
-                            <Label Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold"/>
-                            <Label Grid.Column="2" Text="{Binding Description}"/>
-                            <Label Grid.Column="3" Text="{Binding Price}"/>
-                            <Label Grid.Column="4" Text="{Binding Stock}"/>
-                            <Button Grid.Column="5" 
-                                Text="Edit"
-                                Command="{Binding Path=EditCommand}"
-                                CommandParameter="{Binding}"
-                                />
-                            <Button 
-                                Grid.Column="6" 
-                                Text="Delete" 
-                                Clicked="DeleteItem"
-                                CommandParameter="{Binding}"
-                                />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button 
-            Text="Add"
-            Clicked="AddClicked"
-            />
+    <Grid Padding="30,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <Button
-            Text="Go Back"
-            Clicked="BackClicked"
-            />
-    </VerticalStackLayout>
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="ID" />
+                    <Label Grid.Column="1" Text="NAME" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="DESCRIPTION" />
+                    <Label Grid.Column="3" Text="PRICE" />
+                    <Label Grid.Column="4" Text="STOCK" />
+                </Grid>
+                <ListView
+                    ItemsSource="{Binding Items}"
+                    SelectedItem="{Binding SelectedItem}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Id}" />
+                                    <Label Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold" />
+                                    <Label Grid.Column="2" Text="{Binding Description}" />
+                                    <Label Grid.Column="3" Text="{Binding Price}" />
+                                    <Label Grid.Column="4" Text="{Binding Stock}" />
+                                    <Button Grid.Column="5" 
+                                        Text="Edit"
+                                        Command="{Binding Path=EditCommand}"
+                                        CommandParameter="{Binding}" />
+                                    <Button 
+                                        Grid.Column="6" 
+                                        Text="Delete" 
+                                        Clicked="DeleteItem"
+                                        CommandParameter="{Binding}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="5">
+            <Button 
+                Text="Add"
+                Clicked="AddClicked" />
+
+            <Button
+                Text="Go Back"
+                Clicked="BackClicked" />
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

@@ -73,6 +73,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\CheckoutView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\InventoryView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

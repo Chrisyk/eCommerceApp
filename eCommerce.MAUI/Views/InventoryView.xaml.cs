@@ -14,8 +14,6 @@ public partial class InventoryView : ContentPage
     private void BackClicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//MainPage");
-        var viewModel = BindingContext as InventoryManagementViewModel;
-        viewModel?.RefreshItems();
     }
     private void DeleteItem(object sender, EventArgs e)
     {

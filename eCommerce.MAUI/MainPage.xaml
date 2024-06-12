@@ -6,7 +6,7 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
-            Spacing="20">
+            Spacing="5">
             <Button 
                 Text="Manage Inventory" 
                 Clicked="ManageInventoryClicked"/>

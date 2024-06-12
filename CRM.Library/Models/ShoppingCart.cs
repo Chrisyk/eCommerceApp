@@ -7,9 +7,18 @@ using CRM.Models;
 
 namespace CRM.Library.Models
 {
-    internal class ShoppingCart
+    public class ShoppingCart
     {
         int Id { get; set; }
-        public List<Item>? Contents { get; set; }
+        public List<Item> Contents { get; set; }
+
+        public ShoppingCart()
+        {
+            Contents = new List<Item>
+            {
+                new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=2}
+            };
+        }
+
     }
 }
