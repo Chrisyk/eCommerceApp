@@ -21,12 +21,14 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                         <ColumnDefinition />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="ID" />
                     <Label Grid.Column="1" Text="NAME" FontAttributes="Bold" />
                     <Label Grid.Column="2" Text="DESCRIPTION" />
                     <Label Grid.Column="3" Text="PRICE" />
-                    <Label Grid.Column="4" Text="STOCK" />
+                    <Label Grid.Column="4" Text="MARKDOWN"/>
+                    <Label Grid.Column="5" Text="STOCK" />
                 </Grid>
                 <ListView
                     ItemsSource="{Binding Items}"
@@ -43,18 +45,20 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
+                                        <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Text="{Binding Id}" />
                                     <Label Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold" />
                                     <Label Grid.Column="2" Text="{Binding Description}" />
                                     <Label Grid.Column="3" Text="{Binding Price}" />
-                                    <Label Grid.Column="4" Text="{Binding Stock}" />
-                                    <Button Grid.Column="5" 
+                                    <Label Grid.Column="4" Text="{Binding Markdown}" />
+                                    <Label Grid.Column="5" Text="{Binding Stock}" />
+                                    <Button Grid.Column="6" 
                                         Text="Edit"
                                         Command="{Binding Path=EditCommand}"
                                         CommandParameter="{Binding}" />
                                     <Button 
-                                        Grid.Column="6" 
+                                        Grid.Column="7" 
                                         Text="Delete" 
                                         Clicked="DeleteItem"
                                         CommandParameter="{Binding}" />

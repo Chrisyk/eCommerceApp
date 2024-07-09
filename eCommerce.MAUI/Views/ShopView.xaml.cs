@@ -8,6 +8,7 @@ public partial class ShopView : ContentPage
 	{
         InitializeComponent();
         BindingContext = new CompositeViewModel();
+        
     }
 
     private void AddClicked(object sender, EventArgs e)

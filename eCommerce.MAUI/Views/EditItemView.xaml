@@ -21,8 +21,14 @@
         <Label Text="Price" />
         <Entry Text="{Binding Price}" Keyboard="Numeric" />
 
+        <Label Text="Markdown"/>
+        <Entry Text="{Binding Markdown}" Keyboard="Numeric"/>
+
         <Label Text="Stock" />
         <Entry Text="{Binding Stock}" Keyboard="Numeric" />
+
+        <Label Text="Buy One Get One Free"/>
+        <Switch IsToggled="{Binding B1G1F}" />
 
         <Button Text="Save" Clicked="SaveClicked" />
         <Button Text="Cancel" Clicked="CancelClicked" />

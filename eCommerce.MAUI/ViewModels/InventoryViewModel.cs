@@ -83,6 +83,30 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
+        public bool? B1G1F
+        {
+            get => editItem?.B1G1F;
+            set
+            {
+                if (editItem != null && editItem.B1G1F != value)
+                {
+                    editItem.B1G1F = value ?? false;
+                }
+            }
+        }
+
+        public decimal? Markdown
+        {
+            get => editItem?.Markdown;
+            set
+            {
+                if (editItem != null && editItem.Markdown != value)
+                {
+                    editItem.Markdown = value ?? 0;
+                }
+            }
+        }
+
         private void ExecuteEdit(InventoryViewModel? p)
         {
             if (p == null)
@@ -134,6 +158,8 @@ namespace eCommerce.MAUI.ViewModels
                     Description = Item.Description,
                     Price = Item.Price,
                     Stock = Item.Stock,
+                    B1G1F = Item.B1G1F,
+                    Markdown = Item.Markdown,
                 };
             }
             SetupCommands();
@@ -163,6 +189,8 @@ namespace eCommerce.MAUI.ViewModels
                 Item.Description = editItem.Description;
                 Item.Price = editItem.Price;
                 Item.Stock = editItem.Stock;
+                Item.B1G1F = editItem.B1G1F;
+                Item.Markdown = editItem.Markdown;
                 Add();
             }
         }

@@ -26,7 +26,7 @@ namespace CRM.Library.Service
         private InventoryServiceProxy()
         {
             items = new List<Item> {
-                new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=2}
+                new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=2, B1G1F=false}
             };
         }
 

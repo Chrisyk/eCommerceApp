@@ -55,7 +55,13 @@ namespace eCommerce.MAUI.ViewModels
         {
             get
             {
-                return SubTotal * 0.7m;
+                return ShopServiceProxy.Current.Tax;
+            }
+            set
+            {
+               ShopServiceProxy.Current.Tax = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged("Total");
             }
         }
 
@@ -64,7 +70,7 @@ namespace eCommerce.MAUI.ViewModels
 
            get
             {
-                return SubTotal + Tax;
+                return SubTotal + (SubTotal * Tax);
             }
         }
 

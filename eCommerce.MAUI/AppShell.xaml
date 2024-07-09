@@ -28,5 +28,10 @@
      Title="Checkout"
      ContentTemplate="{DataTemplate views:CheckoutView}"
      Route="Checkout" />
+    <ShellContent
+     Title="Canfiguration"
+     ContentTemplate="{DataTemplate views:ConfigurationView}"
+     Route="Configuration" />
+        
 
 </Shell>

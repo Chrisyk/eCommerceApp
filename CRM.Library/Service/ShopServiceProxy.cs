@@ -25,9 +25,12 @@ namespace CRM.Library.Service
         private ShopServiceProxy() {
 
             items = new List<Item> {
-                new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=2}
+                new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=2, B1G1F=false}
             };
+            Tax = 0.7m;
         }
+
+        public decimal Tax { get; set; }
 
         public decimal TotalPrice()
         {
@@ -85,6 +88,19 @@ namespace CRM.Library.Service
                 {
                     inventoryItem.Stock -= 1;
                     items.Add(newItem);
+                    if (inventoryItem.B1G1F)
+                    {
+                        Item newItemFree = new Item
+                        {
+                            Id = newItem.Id,
+                            Name = newItem.Name,
+                            Description = newItem.Description,
+                            Price = newItem.Price,
+                            Stock = newItem.Stock,
+                            B1G1F = newItem.B1G1F,
+                        };
+                        items.Add(newItemFree);
+                    }
                 }
             }
         }

@@ -19,6 +19,9 @@ namespace eCommerce.MAUI
         {
             Shell.Current.GoToAsync("//Shop");
         }
+        private void SettingsClicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Configuration");
+        }
     }
-
 }
