@@ -7,37 +7,28 @@ public partial class ShopView : ContentPage
     public ShopView()
 	{
         InitializeComponent();
-        BindingContext = new CompositeViewModel();
+        BindingContext = new CartManagementViewModel();
         
     }
 
-    private void AddClicked(object sender, EventArgs e)
+    private void AddCartClicked(object sender, EventArgs e)
     {
-        var button = sender as Button;
-        var item = button?.BindingContext as InventoryViewModel;
-        if (item != null)
-        {
-            (BindingContext as CompositeViewModel)?.ShopViewModel?.AddItem(item);
-        }
-        (BindingContext as CompositeViewModel).InventoryViewModel?.RefreshItems();
-        (BindingContext as CompositeViewModel).ShopViewModel?.RefreshItems();
-
+        (BindingContext as CartManagementViewModel)?.AddCart();
     }
 
     private void DeleteClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
-        var item = button?.BindingContext as ShopViewModel;
-        if (item != null)
+        var Cart = button?.BindingContext as CartViewModel;
+        if (Cart != null)
         {
-            (BindingContext as CompositeViewModel)?.ShopViewModel?.RemoveItem(item);
+            (BindingContext as CartManagementViewModel)?.RemoveCart(Cart);
         }
-      (BindingContext as CompositeViewModel).InventoryViewModel?.RefreshItems();
-        (BindingContext as CompositeViewModel).ShopViewModel?.RefreshItems();
+
 
     }
 
-    private void CheckoutClicked(object sender, EventArgs e)
+    private void ViewCartClicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//Checkout");
     }
@@ -49,9 +40,7 @@ public partial class ShopView : ContentPage
 
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
-        (BindingContext as CompositeViewModel).ShopViewModel?.RefreshItems();
-        (BindingContext as CompositeViewModel).InventoryViewModel?.RefreshItems();
-
+        (BindingContext as CartManagementViewModel)?.RefreshItems();
 
     }
 

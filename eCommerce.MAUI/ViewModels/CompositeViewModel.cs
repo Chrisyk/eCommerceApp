@@ -12,10 +12,10 @@ namespace eCommerce.MAUI.ViewModels
         public InventoryManagementViewModel InventoryViewModel { get; set; }
         public ShopManagementViewModel ShopViewModel { get; set; }
 
-        public CompositeViewModel()
+        public CompositeViewModel(int id)
         {
             InventoryViewModel = new InventoryManagementViewModel();
-            ShopViewModel = new ShopManagementViewModel();
+            ShopViewModel = new ShopManagementViewModel(id);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

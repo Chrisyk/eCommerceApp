@@ -5,10 +5,6 @@
              xmlns:local="clr-namespace:eCommerce.MAUI.ViewModels"
              Title="ShopView"
              NavigatedTo="ContentPage_NavigatedTo">
-    <ContentPage.BindingContext>
-        <local:CompositeViewModel />
-    </ContentPage.BindingContext>
-
     <Grid Padding="30,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -17,27 +13,16 @@
 
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="20">
-                <Label Text="Receipt" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="Carts" FontSize="Medium" FontAttributes="Bold" />
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="ID" />
-                    <Label Grid.Column="1" Text="NAME" FontAttributes="Bold" />
-                    <Label Grid.Column="2" Text="DESCRIPTION" />
-                    <Label Grid.Column="3" Text="PRICE" />
-                    <Label Grid.Column="4" Text="STOCK" />
-                    <Label Grid.Column="5" Text="Buy-1 Get-1 Free" />
                 </Grid>
                 <ListView
-                    ItemsSource="{Binding InventoryViewModel.Items}"
-                    SelectedItem="{Binding InventoryViewModel.SelectedItem}">
+                    ItemsSource="{Binding Carts}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -46,61 +31,15 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Text="{Binding Id}" />
-                                    <Label Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold" />
-                                    <Label Grid.Column="2" Text="{Binding Description}" />
-                                    <Label Grid.Column="3" Text="{Binding Price}" />
-                                    <Label Grid.Column="4" Text="{Binding Stock}" />
-                                    <Label Grid.Column="5" Text="{Binding B1G1F}" />
                                     <Button 
-                                        Grid.Column="6" 
-                                        Text="Add"
-                                        Clicked="AddClicked"
+                                        Grid.Column="1" 
+                                        Text="Add Items To Cart" 
+                                        Command="{Binding Path=ViewCartCommand}"
                                         CommandParameter="{Binding}" />
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Label Text="Cart" FontSize="Medium" FontAttributes="Bold" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="ID" />
-                    <Label Grid.Column="1" Text="NAME" FontAttributes="Bold" />
-                    <Label Grid.Column="2" Text="DESCRIPTION" />
-                    <Label Grid.Column="3" Text="PRICE" />
-                </Grid>
-                <ListView
-                    ItemsSource="{Binding ShopViewModel.Items}"
-                    SelectedItem="{Binding ShopViewModel.SelectedItem}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding Id}" />
-                                    <Label Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold" />
-                                    <Label Grid.Column="2" Text="{Binding Description}" />
-                                    <Label Grid.Column="3" Text="{Binding Price}" />
                                     <Button 
-                                        Grid.Column="4" 
+                                        Grid.Column="2" 
                                         Text="Delete" 
                                         Clicked="DeleteClicked" />
                                 </Grid>
@@ -113,29 +52,9 @@
         </ScrollView>
 
         <VerticalStackLayout Grid.Row="1" Spacing="5">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="Subtotal" />
-                <Label Grid.Column="1" Text="Tax" />
-                <Label Grid.Column="2" Text="Total" />
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="{Binding ShopViewModel.SubTotal}" />
-                <Label Grid.Column="1" Text="{Binding ShopViewModel.Tax}" />
-                <Label Grid.Column="2" Text="{Binding ShopViewModel.Total}" />
-            </Grid >
             <Button
-                Text="Checkout"
-                Clicked="CheckoutClicked" />
+                Text="Add Cart"
+                Clicked="AddCartClicked" />
             <Button
                 Text="Go Back"
                 Clicked="BackClicked" />

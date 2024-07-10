@@ -32,6 +32,10 @@
      Title="Canfiguration"
      ContentTemplate="{DataTemplate views:ConfigurationView}"
      Route="Configuration" />
+    <ShellContent
+     Title="Cart"
+     ContentTemplate="{DataTemplate views:CartView}"
+     Route="Cart" />
         
 
 </Shell>

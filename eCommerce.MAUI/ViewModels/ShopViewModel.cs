@@ -45,41 +45,36 @@ namespace eCommerce.MAUI.ViewModels
         public int? Stock
         {
             get => Item?.Stock;
- 
+
         }
 
-        public void ExecuteAdd(Item item)
+        public bool? B1G1F {
+            get => Item?.B1G1F;
+        }
+
+        public decimal? Markdown 
+        
         {
-            if (item == null)
-            {
-                return;
-            }
-
-            ShopServiceProxy.Current.AddToCart(item);
+            get => Item?.Markdown;
+        
         }
+
+        public decimal? NewPrice
+
+        {
+            get => Item?.NewPrice;
+
+        }
+
 
         public void SetupCommands()
         {
-            AddCommand = new Command(
-                (c) => ExecuteAdd(c as Item));
 
         }
 
         public ShopViewModel()
         {
             Item = new Item();
-            SetupCommands();
-        }
-
-        public ShopViewModel(int id)
-        {
-            Item = ShopServiceProxy.Current?.Items?.FirstOrDefault(c => c.Id == id);
-            if (Item == null)
-            {
-                Item = new Item();
-            }
-            else
-
             SetupCommands();
         }
 

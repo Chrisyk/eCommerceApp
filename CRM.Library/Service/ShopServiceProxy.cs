@@ -13,31 +13,36 @@ namespace CRM.Library.Service
     {
         private static ShopServiceProxy? instance;
         private static object instanceLock = new object();
-        private List<Item> items;
-        public ReadOnlyCollection<Item> Items
+        private List<ShoppingCart> carts;
+        public ReadOnlyCollection<ShoppingCart> Carts
         {
             get
             {
-                return items.AsReadOnly();
+                return carts.AsReadOnly();
             }
         }
 
         private ShopServiceProxy() {
 
-            items = new List<Item> {
-                new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=2, B1G1F=false}
+            carts = new List<ShoppingCart>
+            {
+               new ShoppingCart
+               {
+                   Id = 0,
+                   Contents = new List<Item>(),
+               }
             };
             Tax = 0.7m;
         }
 
         public decimal Tax { get; set; }
 
-        public decimal TotalPrice()
+        public decimal TotalPrice(int id)
         {
             decimal total = 0;
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < Current.Carts.FirstOrDefault(c => c.Id == id)?.Contents?.Count; i++)
             {
-                total += items[i].Price;
+                total += Current.Carts.FirstOrDefault(c => c.Id == id).Contents[i].NewPrice;
             }
             return total;
         }
@@ -59,7 +64,7 @@ namespace CRM.Library.Service
         
         }
 
-        public void RemoveFromCart(Item item)
+        public void RemoveFromCart(Item item, int id)
         {
             var inventoryItem = InventoryServiceProxy.Current.Items.FirstOrDefault(product => product.Id == item.Id);
 
@@ -70,11 +75,46 @@ namespace CRM.Library.Service
             lock (instanceLock)
             {
                 inventoryItem.Stock += 1;
-                items.Remove(item);
+                Current.Carts.FirstOrDefault(c => c.Id == id)?.Contents?.Remove(item);
             }
         }
 
-        public void AddToCart(Item newItem)
+        public void RemoveCart(ShoppingCart cart)
+        {
+            lock (instanceLock)
+            {
+                if (carts.Contains(cart))
+                {
+                    carts.Remove(cart);
+
+                }
+            }
+        }
+
+        public int getLatestCartId()
+        {
+            lock (instanceLock)
+            {
+                if (carts.Count == 0)
+                {
+                    return 0;
+                }
+                int maxId = carts.Max(cart => cart.Id);
+                return maxId;
+            }
+        }
+
+        public void AddCart()
+        {
+            lock (instanceLock)
+            {
+                ShoppingCart newCart = new ShoppingCart();
+                newCart.Id = getLatestCartId() + 1;
+                carts.Add(newCart);
+            }
+        }
+
+        public void AddToCart(Item newItem, int id)
         {
             var inventoryItem = InventoryServiceProxy.Current.Items.FirstOrDefault(product => product.Id == newItem.Id);
 
@@ -87,19 +127,20 @@ namespace CRM.Library.Service
                 if (inventoryItem.Stock > 0)
                 {
                     inventoryItem.Stock -= 1;
-                    items.Add(newItem);
+                    Current.Carts.FirstOrDefault(c => c.Id == id)?.Contents?.Add(newItem);
                     if (inventoryItem.B1G1F)
                     {
+                        inventoryItem.Stock -= 1;
                         Item newItemFree = new Item
                         {
                             Id = newItem.Id,
                             Name = newItem.Name,
                             Description = newItem.Description,
-                            Price = newItem.Price,
+                            Price = 0,
                             Stock = newItem.Stock,
                             B1G1F = newItem.B1G1F,
                         };
-                        items.Add(newItemFree);
+                        Current.Carts.FirstOrDefault(c => c.Id == id)?.Contents?.Add(newItemFree);
                     }
                 }
             }

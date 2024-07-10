@@ -7,35 +7,43 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using CRM.Models;
+using CRM.Library.Models;
 
 namespace eCommerce.MAUI.ViewModels
 {
     public class ShopManagementViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler ?PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public int Id { get; set; }
 
         public List<ShopViewModel> Items
         {
             get
             {
-                return ShopServiceProxy.Current?.Items?.Select(c => new ShopViewModel(c)).ToList()
+                return ShopServiceProxy.Current.Carts.FirstOrDefault(c => c.Id == Id).Contents.Select(c => new ShopViewModel(c)).ToList()
                     ?? new List<ShopViewModel>();
             }
         }
-        public ShopViewModel SelectedItem { get; set; }
+        public ShopViewModel? SelectedItem { get; set; }
 
         public ShopManagementViewModel()
         {
         }
 
-        public void RefreshItems() 
+        public ShopManagementViewModel(int id)
         {
+            Id = id;
+        }
+
+        public void RefreshItems()
+        {
+            NotifyPropertyChanged("Id");
             NotifyPropertyChanged("Items");
             NotifyPropertyChanged("SubTotal");
             NotifyPropertyChanged("Tax");
@@ -47,7 +55,7 @@ namespace eCommerce.MAUI.ViewModels
         {
             get
             {
-                return ShopServiceProxy.Current.TotalPrice();
+                return ShopServiceProxy.Current.TotalPrice(Id);
             }
         }
 
@@ -59,16 +67,14 @@ namespace eCommerce.MAUI.ViewModels
             }
             set
             {
-               ShopServiceProxy.Current.Tax = value;
-                NotifyPropertyChanged();
+                ShopServiceProxy.Current.Tax = value;
                 NotifyPropertyChanged("Total");
             }
         }
 
         public decimal Total
         {
-
-           get
+            get
             {
                 return SubTotal + (SubTotal * Tax);
             }
@@ -81,10 +87,10 @@ namespace eCommerce.MAUI.ViewModels
                 return;
             }
 
-            var itemToRemove = ShopServiceProxy.Current.Items.FirstOrDefault(c => c.Id == item?.Item?.Id);
+            var itemToRemove = ShopServiceProxy.Current.Carts[Id].Contents.FirstOrDefault(c => c.Id == item?.Id);
             if (itemToRemove != null)
             {
-                ShopServiceProxy.Current.RemoveFromCart(itemToRemove);
+                ShopServiceProxy.Current.RemoveFromCart(itemToRemove, Id);
                 RefreshItems();
             }
         }
@@ -95,8 +101,12 @@ namespace eCommerce.MAUI.ViewModels
             {
                 return;
             }
+            if (item.Item == null)
+            {
+                return;
+            }
 
-            ShopServiceProxy.Current.AddToCart(item.Item);
+            ShopServiceProxy.Current.AddToCart(item.Item, Id);
             RefreshItems();
         }
 

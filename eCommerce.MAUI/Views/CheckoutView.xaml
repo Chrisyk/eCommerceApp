@@ -2,8 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eCommerce.MAUI.Views.CheckoutView"
-             Title="CheckoutView">
-    <VerticalStackLayout>
+             Title="CheckoutView"
+             NavigatedTo="ContentPage_NavigatedTo">
+    <Grid Padding="30,0">
+        <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <ScrollView Grid.Row="0">
+        <VerticalStackLayout>
         <Label Text="Receipt" FontSize="Medium" FontAttributes="Bold"/>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -18,8 +25,7 @@
             <Label Grid.Column="3" Text="PRICE"/>
         </Grid>
         <ListView
-    ItemsSource="{Binding Items}"
-    SelectedItem="{Binding SelectedItem}">
+    ItemsSource="{Binding Items}">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -35,7 +41,7 @@
                             <Label Grid.Column="0" Text="{Binding Id}" />
                             <Label Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold"/>
                             <Label Grid.Column="2" Text="{Binding Description}"/>
-                            <Label Grid.Column="3" Text="{Binding Price}"/>
+                            <Label Grid.Column="3" Text="{Binding NewPrice}"/>
 
                         </Grid>
                     </ViewCell>
@@ -63,4 +69,11 @@
             <Label Grid.Column="2" Text="{Binding Total}"/>
         </Grid>
     </VerticalStackLayout>
+    </ScrollView>
+        <VerticalStackLayout Grid.Row="1" Spacing="5">
+            <Button
+                Text="Go Back"
+                Clicked="BackClicked" />
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

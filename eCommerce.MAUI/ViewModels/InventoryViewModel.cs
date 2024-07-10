@@ -107,6 +107,13 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
+        public decimal? NewPrice
+
+        {
+            get => Item?.NewPrice;
+
+        }
+
         private void ExecuteEdit(InventoryViewModel? p)
         {
             if (p == null)
