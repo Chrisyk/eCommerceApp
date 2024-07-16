@@ -1,7 +1,6 @@
-﻿using CRM.Library.Service;
+﻿using eCommerce.Library.Service;
 using System.Windows.Input;
-using CRM.Models;
-using CRM.Library.Models;
+using eCommerce.Library.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 

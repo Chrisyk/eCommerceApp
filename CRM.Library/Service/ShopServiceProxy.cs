@@ -4,10 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CRM.Library.Models;
-using CRM.Models;
+using eCommerce.Library.Models;
 
-namespace CRM.Library.Service
+namespace eCommerce.Library.Service
 {
     public class ShopServiceProxy
     {
@@ -22,7 +21,8 @@ namespace CRM.Library.Service
             }
         }
 
-        private ShopServiceProxy() {
+        private ShopServiceProxy()
+        {
 
             carts = new List<ShoppingCart>
             {
@@ -51,7 +51,7 @@ namespace CRM.Library.Service
         {
             get
             {
-                lock (instanceLock) 
+                lock (instanceLock)
                 {
                     if (instance == null)
                     {
@@ -61,7 +61,7 @@ namespace CRM.Library.Service
                 }
                 return instance;
             }
-        
+
         }
 
         public void RemoveFromCart(Item item, int id)

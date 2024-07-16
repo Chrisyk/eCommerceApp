@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CRM.Models;
+using eCommerce.Library.Models;
 
-namespace CRM.Library.Service
+namespace eCommerce.Library.Service
 {
     public class ItemServiceProxy
     {
-        private ItemServiceProxy() { 
+        private ItemServiceProxy()
+        {
             items = new List<Item>();
         }
         public static ItemServiceProxy? instance;
@@ -28,7 +29,7 @@ namespace CRM.Library.Service
                 }
                 return instance;
             }
-                
+
         }
 
         private List<Item>? items;
@@ -58,7 +59,7 @@ namespace CRM.Library.Service
                 return;
             }
             items.Add(item);
-            
+
         }
         public void Remove(int id)
         {

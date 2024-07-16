@@ -1,4 +1,4 @@
-using CRM.Models;
+using eCommerce.Library.Models;
 using eCommerce.MAUI.ViewModels;
 namespace eCommerce.MAUI.Views;
 

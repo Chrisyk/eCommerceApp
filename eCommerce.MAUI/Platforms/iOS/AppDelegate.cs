@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace eCommerce.MAUI
+namespace eCommerce.MAUI.Platforms.iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

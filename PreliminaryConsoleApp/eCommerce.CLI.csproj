@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CRM.Library\CRM.Library.csproj" />
+    <ProjectReference Include="..\CRM.Library\eCommerce.Library.csproj" />
   </ItemGroup>
 
 </Project>

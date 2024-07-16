@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace eCommerce.MAUI
+namespace eCommerce.MAUI.Platforms.iOS
 {
     public class Program
     {

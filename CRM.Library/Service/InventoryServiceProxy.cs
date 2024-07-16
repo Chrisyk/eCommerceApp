@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using CRM.Models;
+using eCommerce.Library.Utility;
+using Newtonsoft.Json;
+using eCommerce.Library.Models;
 
-namespace CRM.Library.Service
+namespace eCommerce.Library.Service
 {
     public class InventoryServiceProxy
     {
@@ -16,7 +19,8 @@ namespace CRM.Library.Service
 
         private List<Item> items;
 
-        public ReadOnlyCollection<Item> Items {
+        public ReadOnlyCollection<Item> Items
+        {
             get
             {
                 return items.AsReadOnly();
@@ -28,23 +32,25 @@ namespace CRM.Library.Service
             items = new List<Item> {
                 new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=200, B1G1F=true}
             };
+            var response = new WebRequestHandler().Get("/Inventory").Result;
+            items = JsonConvert.DeserializeObject<List<Item>>(response);
         }
 
         private int NextId
         {
             get
             {
-                if(!items.Any()) return 1;
+                if (!items.Any()) return 1;
 
                 return items.Select(x => x.Id).Max() + 1;
             }
-            
+
         }
 
         public Item AddOrUpdate(Item item)
         {
             bool isAdd = false;
-            if(item.Id == 0)
+            if (item.Id == 0)
             {
                 isAdd = true;
                 item.Id = NextId;

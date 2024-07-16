@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CRM.Models
+namespace eCommerce.Library.Models
 {
     public class Item
     {

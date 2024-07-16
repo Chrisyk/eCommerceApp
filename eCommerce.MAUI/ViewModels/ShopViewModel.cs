@@ -1,11 +1,11 @@
-﻿using CRM.Library.Service;
+﻿using eCommerce.Library.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Item = CRM.Models.Item;
+using Item = eCommerce.Library.Models.Item;
 
 namespace eCommerce.MAUI.ViewModels
 {

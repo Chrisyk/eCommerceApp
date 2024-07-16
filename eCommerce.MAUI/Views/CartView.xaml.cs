@@ -1,5 +1,5 @@
 using eCommerce.MAUI.ViewModels;
-using CRM.Library.Service;
+using eCommerce.Library.Service;
 
 namespace eCommerce.MAUI.Views;
 [QueryProperty(nameof(CartId), "CartId")]

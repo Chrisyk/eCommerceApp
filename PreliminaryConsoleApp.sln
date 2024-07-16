@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.CLI", "PreliminaryConsoleApp\eCommerce.CLI.csproj", "{78F5EBE1-60C5-40F0-92EF-D04A4183592F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.Library", "CRM.Library\eCommerce.Library.csproj", "{28396AF2-926D-45B2-BD4D-F74B82A8937A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Library", "CRM.Library\CRM.Library.csproj", "{28396AF2-926D-45B2-BD4D-F74B82A8937A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerce.MAUI", "eCommerce.MAUI\eCommerce.MAUI.csproj", "{77314920-08D6-43F8-A025-F4DEBD05C598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.MAUI", "eCommerce.MAUI\eCommerce.MAUI.csproj", "{77314920-08D6-43F8-A025-F4DEBD05C598}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78F5EBE1-60C5-40F0-92EF-D04A4183592F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78F5EBE1-60C5-40F0-92EF-D04A4183592F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78F5EBE1-60C5-40F0-92EF-D04A4183592F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78F5EBE1-60C5-40F0-92EF-D04A4183592F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28396AF2-926D-45B2-BD4D-F74B82A8937A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{28396AF2-926D-45B2-BD4D-F74B82A8937A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28396AF2-926D-45B2-BD4D-F74B82A8937A}.Release|Any CPU.ActiveCfg = Release|Any CPU

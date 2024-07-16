@@ -1,4 +1,4 @@
-using CRM.Library.Service;
+using eCommerce.Library.Service;
 using eCommerce.MAUI.ViewModels;
 namespace eCommerce.MAUI.Views;
 [QueryProperty(nameof(CartId), "CartId")]
