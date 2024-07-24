@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Item = eCommerce.Library.Models.Item;
-
+using eCommerce.Library.DTO;   
 namespace eCommerce.MAUI.ViewModels
 {
 
@@ -15,9 +14,9 @@ namespace eCommerce.MAUI.ViewModels
         public ICommand? EditCommand { get; private set; }
         public ICommand? AddCommand { get; private set; }
 
-        public Item? Item;
+        public ItemDTO? Item;
 
-        private Item? editItem;
+        private ItemDTO? editItem;
 
         public int? Id
         {
@@ -127,11 +126,6 @@ namespace eCommerce.MAUI.ViewModels
             Shell.Current.GoToAsync($"//EditItem");
         }
 
-        public void Add()
-        {
-            InventoryServiceProxy.Current.AddOrUpdate(Item);
-        }
-
         public void SetupCommands()
         {
             EditCommand = new Command(
@@ -143,8 +137,8 @@ namespace eCommerce.MAUI.ViewModels
 
         public InventoryViewModel()
         {
-            Item = new Item();
-            editItem = new Item();
+            Item = new ItemDTO();
+            editItem = new ItemDTO();
             SetupCommands();
         }
 
@@ -153,11 +147,11 @@ namespace eCommerce.MAUI.ViewModels
             Item = InventoryServiceProxy.Current?.Items?.FirstOrDefault(c => c.Id == id);
             if (Item == null)
             {
-                Item = new Item();
-                editItem = new Item();
+                Item = new ItemDTO();
+                editItem = new ItemDTO();
             } else
             {
-                editItem = new Item
+                editItem = new ItemDTO
                 {
                     Id = Item.Id,
                     Name = Item.Name,
@@ -171,7 +165,7 @@ namespace eCommerce.MAUI.ViewModels
             SetupCommands();
         }
 
-        public InventoryViewModel(Item item)
+        public InventoryViewModel(ItemDTO item)
         {
             Item = item;
             editItem = item;
@@ -186,7 +180,7 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
-        public void SaveChanges()
+        public async void SaveChanges()
         {
             if (Item != null)
             {
@@ -197,7 +191,8 @@ namespace eCommerce.MAUI.ViewModels
                 Item.Stock = editItem.Stock;
                 Item.B1G1F = editItem.B1G1F;
                 Item.Markdown = editItem.Markdown;
-                Add();
+                Item = await InventoryServiceProxy.Current.AddOrUpdate(Item);
+
             }
         }
 

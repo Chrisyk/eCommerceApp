@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eCommerce.Library.Models;
+using eCommerce.Library.DTO;
 
 namespace eCommerce.Library.Service
 {
@@ -29,7 +30,7 @@ namespace eCommerce.Library.Service
                new ShoppingCart
                {
                    Id = 0,
-                   Contents = new List<Item>(),
+                   Contents = new List<ItemDTO>(),
                }
             };
             Tax = 0.7m;
@@ -64,7 +65,7 @@ namespace eCommerce.Library.Service
 
         }
 
-        public void RemoveFromCart(Item item, int id)
+        public void RemoveFromCart(ItemDTO item, int id)
         {
             var inventoryItem = InventoryServiceProxy.Current.Items.FirstOrDefault(product => product.Id == item.Id);
 
@@ -114,7 +115,7 @@ namespace eCommerce.Library.Service
             }
         }
 
-        public void AddToCart(Item newItem, int id)
+        public void AddToCart(ItemDTO newItem, int id)
         {
             var inventoryItem = InventoryServiceProxy.Current.Items.FirstOrDefault(product => product.Id == newItem.Id);
 
@@ -131,7 +132,7 @@ namespace eCommerce.Library.Service
                     if (inventoryItem.B1G1F)
                     {
                         inventoryItem.Stock -= 1;
-                        Item newItemFree = new Item
+                        ItemDTO newItemFree = new ItemDTO
                         {
                             Id = newItem.Id,
                             Name = newItem.Name,

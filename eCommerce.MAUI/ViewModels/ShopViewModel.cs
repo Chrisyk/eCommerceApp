@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using eCommerce.Library.DTO;
 using Item = eCommerce.Library.Models.Item;
 
 namespace eCommerce.MAUI.ViewModels
@@ -13,7 +14,7 @@ namespace eCommerce.MAUI.ViewModels
     {
         public ICommand? AddCommand { get; private set; }
 
-        public Item? Item;
+        public ItemDTO? Item;
 
         public int? Id
         {
@@ -74,11 +75,11 @@ namespace eCommerce.MAUI.ViewModels
 
         public ShopViewModel()
         {
-            Item = new Item();
+            Item = new ItemDTO();
             SetupCommands();
         }
 
-        public ShopViewModel(Item item)
+        public ShopViewModel(ItemDTO item)
         {
             Item = item;
             SetupCommands();

@@ -86,9 +86,18 @@ namespace eCommerce.MAUI.ViewModels
                 return;
             }
 
-            var itemToRemove = ShopServiceProxy.Current.Carts[Id].Contents.FirstOrDefault(c => c.Id == item?.Id);
+            var itemToRemove = ShopServiceProxy.Current.Carts[Id].Contents.FirstOrDefault(c => c.Id == item?.Id && c.Price == item?.Price);
+           
             if (itemToRemove != null)
             {
+                if (itemToRemove.B1G1F)
+                {
+                    var newItemToRemove = ShopServiceProxy.Current.Carts[Id].Contents.FirstOrDefault(c => c.Id == item?.Id && c.Price != itemToRemove?.Price);
+                    if (newItemToRemove != null)
+                    {
+                        ShopServiceProxy.Current.RemoveFromCart(newItemToRemove, Id);
+                    }
+                }
                 ShopServiceProxy.Current.RemoveFromCart(itemToRemove, Id);
                 RefreshItems();
             }

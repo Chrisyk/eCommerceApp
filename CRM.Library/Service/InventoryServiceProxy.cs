@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using eCommerce.Library.Utility;
 using Newtonsoft.Json;
 using eCommerce.Library.Models;
+using eCommerce.Library.DTO;
+using System.Collections;
 
 namespace eCommerce.Library.Service
 {
@@ -17,9 +19,9 @@ namespace eCommerce.Library.Service
         private static InventoryServiceProxy? instance;
         private static object instanceLock = new object();
 
-        private List<Item> items;
+        private List<ItemDTO> items;
 
-        public ReadOnlyCollection<Item> Items
+        public ReadOnlyCollection<ItemDTO> Items
         {
             get
             {
@@ -29,54 +31,60 @@ namespace eCommerce.Library.Service
 
         private InventoryServiceProxy()
         {
-            items = new List<Item> {
-                new Item{Name="Banana", Id=1, Description="Fruity", Price=10, Stock=200, B1G1F=true}
-            };
             var response = new WebRequestHandler().Get("/Inventory").Result;
-            items = JsonConvert.DeserializeObject<List<Item>>(response);
+            items = JsonConvert.DeserializeObject<List<ItemDTO>>(response);
         }
 
-        private int NextId
+        public async Task<ItemDTO> AddOrUpdate(ItemDTO item)
         {
-            get
+            JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                if (!items.Any()) return 1;
-
-                return items.Select(x => x.Id).Max() + 1;
-            }
-
+                TypeNameHandling = TypeNameHandling.All
+            };
+            var result = await new WebRequestHandler().Post("/Inventory", item);
+            return JsonConvert.DeserializeObject<ItemDTO>(result);
         }
 
-        public Item AddOrUpdate(Item item)
+        public async Task<IEnumerable<ItemDTO>> get()
         {
-            bool isAdd = false;
-            if (item.Id == 0)
-            {
-                isAdd = true;
-                item.Id = NextId;
-            }
-            if (isAdd)
-            {
-                items.Add(item);
-            }
-            return item;
+
+            var response = await new WebRequestHandler().Get("/Inventory");
+            var deserializedResult = JsonConvert.DeserializeObject<List<ItemDTO>>(response);
+            items = deserializedResult?.ToList() ?? new List<ItemDTO>();
+            return items;
         }
 
-        public void Remove(int id)
+        public async Task<ItemDTO?> Remove(int id)
         {
-            if (items == null)
+            var response = await new WebRequestHandler().Delete($"/{id}");
+            var itemToDelete = JsonConvert.DeserializeObject<ItemDTO>(response);
+            return itemToDelete;
+        }
+        public async Task<IEnumerable<ItemDTO>> Search(Query? query)
+        {
+            if (query == null || string.IsNullOrEmpty(query.QueryString))
             {
-                return;
+                return await get();
             }
-            var itemToDelete = items.FirstOrDefault(c => c.Id == id);
-            if (itemToDelete != null)
+
+            var result = await new WebRequestHandler().Post("/Inventory/Search", query);
+            items = JsonConvert.DeserializeObject<List<ItemDTO>>(result) ?? new List<ItemDTO>();
+            return items;
+        }
+
+        public async Task ImportItems(string path)
+        {
+            try
             {
-                while (id < items.Count)
+                string jsonContent = await File.ReadAllTextAsync(path);
+                var items = JsonConvert.DeserializeObject<List<Item>>(jsonContent);
+                if (items != null)
                 {
-                    items[id].Id = id;
-                    id++;
+                    var result = await new WebRequestHandler().Post("/Inventory/Import", items);
                 }
-                items.Remove(itemToDelete);
+            } catch(Exception)
+            {
+                throw new Exception("Invalid JSON file");
             }
         }
         public static InventoryServiceProxy Current

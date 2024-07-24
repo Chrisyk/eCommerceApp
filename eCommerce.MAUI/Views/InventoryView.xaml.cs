@@ -31,9 +31,14 @@ public partial class InventoryView : ContentPage
         Shell.Current.GoToAsync($"//EditItem");
     }
 
+    private void ImportClicked(object sender, EventArgs e)
+    {
+        (BindingContext as InventoryManagementViewModel)?.ImportItems();
+    }
+
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
-        (BindingContext as InventoryManagementViewModel).RefreshItems();
+        (BindingContext as InventoryManagementViewModel)?.RefreshItems();
     }
 
     private void ContentPage_NavigatedFrom(object sender, NavigatedFromEventArgs e)
@@ -43,6 +48,10 @@ public partial class InventoryView : ContentPage
     private void InlineDelete_Clicked(object sender, EventArgs e)
     {
         (BindingContext as InventoryManagementViewModel).RefreshItems();
+    }
+    private void SearchClicked(object sender, EventArgs e)
+    {
+        (BindingContext as InventoryManagementViewModel).Search();
     }
 
 }

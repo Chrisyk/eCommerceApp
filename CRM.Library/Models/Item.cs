@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eCommerce.Library.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,17 @@ namespace eCommerce.Library.Models
             Markdown = 0;
             B1G1F = false;
 
+        }
+        
+        public Item(ItemDTO item)
+        {
+            Id = item.Id;
+            Name = item.Name;
+            Description = item.Description;
+            Price = item.Price;
+            Stock = item.Stock;
+            B1G1F = item.B1G1F;
+            Markdown = item.Markdown;
         }
 
         public override string ToString()

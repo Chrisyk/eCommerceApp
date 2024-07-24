@@ -6,11 +6,21 @@
              NavigatedTo="ContentPage_NavigatedTo">
     <Grid Padding="30,0">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <ScrollView Grid.Row="0">
+        <VerticalStackLayout Grid.Row="0" Spacing="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Text="{Binding Query}"/>
+                <Button Grid.Column="1" Text="Search" Clicked="SearchClicked"/>
+            </Grid>
+        </VerticalStackLayout>
+        <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="20">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -70,11 +80,13 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <VerticalStackLayout Grid.Row="1" Spacing="5">
+        <VerticalStackLayout Grid.Row="2" Spacing="5">
             <Button 
                 Text="Add"
                 Clicked="AddClicked" />
-
+            <Button 
+                Text="Import"
+                Clicked="ImportClicked" />
             <Button
                 Text="Go Back"
                 Clicked="BackClicked" />
