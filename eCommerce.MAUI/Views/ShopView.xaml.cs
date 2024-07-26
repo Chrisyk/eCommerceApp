@@ -28,11 +28,6 @@ public partial class ShopView : ContentPage
 
     }
 
-    private void ViewCartClicked(object sender, EventArgs e)
-    {
-        Shell.Current.GoToAsync("//Checkout");
-    }
-
     private void BackClicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//MainPage");

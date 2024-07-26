@@ -43,7 +43,6 @@ namespace eCommerce.MAUI.ViewModels
             NotifyPropertyChanged("SubTotal");
             NotifyPropertyChanged("Tax");
             NotifyPropertyChanged("Total");
-
         }
 
 

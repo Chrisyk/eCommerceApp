@@ -12,7 +12,6 @@ namespace eCommerce.MAUI.ViewModels
     public class InventoryViewModel
     {
         public ICommand? EditCommand { get; private set; }
-        public ICommand? AddCommand { get; private set; }
 
         public ItemDTO? Item;
 
@@ -122,16 +121,10 @@ namespace eCommerce.MAUI.ViewModels
 
         }
 
-        private void ExecuteAdd() {
-            Shell.Current.GoToAsync($"//EditItem");
-        }
-
         public void SetupCommands()
         {
             EditCommand = new Command(
                (c) => ExecuteEdit(c as InventoryViewModel));
-            AddCommand = new Command(
-                (c) => ExecuteAdd());
 
         }
 

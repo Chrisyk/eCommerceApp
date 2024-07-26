@@ -22,7 +22,6 @@ namespace eCommerce.MAUI.ViewModels
         public int Id
         {
             get => Cart.Id;
-
         }
 
         public void ExecuteViewCart(CartViewModel? cart)
@@ -32,7 +31,6 @@ namespace eCommerce.MAUI.ViewModels
                 return;
             }
             Shell.Current.GoToAsync($"//Cart?CartId={cart.Id}");
-
         }
 
         public void SetupCommands()

@@ -13,6 +13,8 @@ public partial class InventoryView : ContentPage
 
     private void BackClicked(object sender, EventArgs e)
     {
+        (BindingContext as InventoryManagementViewModel).Query = null;
+        (BindingContext as InventoryManagementViewModel).Search();
         Shell.Current.GoToAsync("//MainPage");
     }
     private void DeleteItem(object sender, EventArgs e)
